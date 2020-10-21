@@ -7,6 +7,17 @@ export const useForm = (initialState = {}) => {
 
   const handleChange = ({ target }) => {
     const { value, name } = target;
+
+    if (name === "name" || name === "lastName") {
+      const splitName = value.split(" ");
+      const firstUpper = splitName.map(
+        (word) => `${word.trim().charAt(0).toUpperCase()}${word.substring(1)}`
+      );
+      const newValue = firstUpper.join(" ");
+      setState({ ...state, [name]: newValue });
+      return;
+    }
+
     setState({ ...state, [name]: value });
   };
 
